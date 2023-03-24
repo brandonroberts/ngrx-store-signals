@@ -6,20 +6,22 @@ import { withEnabledBlockingInitialNavigation } from '@angular/router';
 
 import { AppComponent } from './app/app.component';
 import { mainProviders } from './main.providers';
+import { bootstrapApplication } from '@angular/platform-browser';
 
 if (import.meta.env.PROD) {
   enableProdMode();
 }
 
 export default async function render(url: string, document: string) {
-  const html = await renderApplication(AppComponent, {
-    appId: 'analog-app',
-    document,
-    url,
+  const bootstrap = () => bootstrapApplication(AppComponent, {
     providers: [
       provideFileRouter(withEnabledBlockingInitialNavigation()),
       mainProviders,
     ],
+  })
+  const html = await renderApplication(bootstrap, {
+    document,
+    url,
   });
 
   return html;

@@ -1,20 +1,34 @@
+import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { dispatch, globalState, increment, decrement, storeAction, doubleCount } from './store';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
-  template: ` <router-outlet></router-outlet> `,
-  styles: [
-    `
-      :host {
-        max-width: 1280px;
-        margin: 0 auto;
-        padding: 2rem;
-        text-align: center;
-      }
-    `,
-  ],
+  imports: [JsonPipe],
+  template: `
+    Action <br/>
+    {{ action() | json }}<br/>
+    Counter {{ state().counter }}<br/>
+    Double {{ double() }}<br/>
+
+    <p>
+      <button (click)="increment()">Increment</button>
+
+      <button (click)="decrement()">Decrement</button>
+    </p>
+  `,
 })
-export class AppComponent {}
+export class AppComponent {
+  action = storeAction;
+  state = globalState;
+  double = doubleCount;
+
+  increment() {
+    dispatch(increment());
+  }
+
+  decrement() {
+    dispatch(decrement());
+  }  
+}
