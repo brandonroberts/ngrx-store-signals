@@ -1,6 +1,10 @@
-# Analog App
+# NgRx Store + Signals
 
 This project was generated with [Analog](https://analogjs.org), the fullstack meta-framework for Angular.
+
+This is a small prototype of building a Redux-style store based on signals with APIs from NgRx Store.
+
+Recording: https://youtube.com/live/uzaYwMXm8kM
 
 ## Setup
 
